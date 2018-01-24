@@ -7,7 +7,6 @@ class Cell:
         self.width = game_settings.cell_width
         self.height = game_settings.cell_height
         self.color = game_settings.cell_color
-
         # Create cell rect object (save one pixel per dimension).
         self.rect = pygame.Rect(0, 0, self.width - 1, self.height - 1)
 

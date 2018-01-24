@@ -1,13 +1,13 @@
-import numpy as np
 import sys
+import numpy as np
 import pygame
-from settings import Settings
+from cell import Cell
 import game_functions as gf
-from status import Status
-from speed import Speed
 from mainmenu import MainMenu
 from options import Options
-from cell import Cell
+from settings import Settings
+from speed import Speed
+from status import Status
 
 def run_game():
     '''Run Game of Life.'''

@@ -132,7 +132,6 @@ class Options:
             return True
         return False
 
-
     def draw(self):
         '''Draw options to start the game on screen.'''
         self.screen.fill(self.color, self.glider_rect)
@@ -161,3 +160,4 @@ class Options:
 
         self.screen.fill(self.color, self.exploder_rect)
         self.screen.blit(self.msg_exploder, self.msg_exploder_rect)
+

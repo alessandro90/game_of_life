@@ -16,7 +16,6 @@ class Speed:
         self.screen_rect = self.screen.get_rect()
         self.bar_size = 0
         
-
     def increase(self):
         '''Increase current speed.'''
         if self.factor > 1e-6:

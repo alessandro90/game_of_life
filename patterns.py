@@ -10,6 +10,7 @@ def glider(cells_matrix, game_settings):
     cells_matrix[rows // 2, cols // 2 + 1] = True
     cells_matrix[rows // 2 - 1, cols // 2] = True
 
+
 def small_exploder(cells_matrix, game_settings):
     game_settings.periodic_boundaries = False
     rows, cols = row_col(game_settings)
@@ -18,10 +19,12 @@ def small_exploder(cells_matrix, game_settings):
     cells_matrix[rows // 2, cols // 2 - 1:cols // 2 + 3:2] = True
     cells_matrix[rows // 2 + 1, cols // 2] = True
 
+
 def ten_cells(cells_matrix, game_settings):
     game_settings.periodic_boundaries = False
     rows, cols = row_col(game_settings)
     cells_matrix[rows // 2, cols // 2 - 5:cols // 2 + 5] = True
+
 
 def crab(cells_matrix, game_settings):
     game_settings.periodic_boundaries = True
@@ -61,6 +64,7 @@ def crab(cells_matrix, game_settings):
 
     cells_matrix[rows // 2 + 4, cols // 2 + 3] = True
     cells_matrix[rows // 2 + 4, cols // 2 + 4] = True
+
 
 def hivenudger(cells_matrix, game_settings):
     game_settings.periodic_boundaries = True
@@ -118,6 +122,7 @@ def hivenudger(cells_matrix, game_settings):
     cells_matrix[rows // 2 + 12, cols // 2 + 9] = True
     cells_matrix[rows // 2 + 12, cols // 2 + 12] = True
 
+
 def koks_galaxy(cells_matrix, game_settings):
     game_settings.periodic_boundaries = False
     rows, cols = row_col(game_settings)
@@ -130,12 +135,14 @@ def koks_galaxy(cells_matrix, game_settings):
     cells_matrix[rows // 2 - 5:rows // 2  + 1, cols // 2 - 4:cols // 2 - 2] = True
     cells_matrix[rows // 2 - 2:rows // 2  + 4, cols // 2 + 3:cols // 2 + 5] = True
 
+
 # Auxiliary functions for the glider gun.
 def square(cells_matrix, x, y):
     cells_matrix[x, y] = True
     cells_matrix[x - 1, y] = True
     cells_matrix[x, y + 1] = True
     cells_matrix[x - 1, y + 1] = True
+
 
 def six_block(cells_matrix, x, y):
     cells_matrix[x + 1, y] = True
@@ -145,12 +152,14 @@ def six_block(cells_matrix, x, y):
     cells_matrix[x, y - 1] = True
     cells_matrix[x + 1, y - 1] = True
 
+
 def vglider(cells_matrix, x, y):
     cells_matrix[x + 1, y - 1] = True
     cells_matrix[x, y - 1] = True
     cells_matrix[x - 1, y - 1] = True
     cells_matrix[x - 1, y] = True
     cells_matrix[x, y + 1] = True
+
 
 def hglider(cells_matrix, x, y):
     cells_matrix[x - 1, y - 1] = True
@@ -159,6 +168,8 @@ def hglider(cells_matrix, x, y):
     cells_matrix[x, y - 1] = True
     cells_matrix[x + 1, y] = True
 #######################################
+
+
 def glider_gun(cells_matrix, game_settings):
     game_settings.periodic_boundaries = False
     rows, cols = row_col(game_settings)
@@ -171,6 +182,7 @@ def glider_gun(cells_matrix, game_settings):
 
     six_block(cells_matrix, rows // 2 - 2, cols // 2 - 8)
     six_block(cells_matrix, rows // 2 - 4, cols // 2 + 6)
+
 
 def exploder(cells_matrix, game_settings):
     game_settings.periodic_boundaries = False

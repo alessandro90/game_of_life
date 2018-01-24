@@ -1,14 +1,13 @@
-import numpy as np
-import pygame
 import sys
-from numba import jit
-import patterns as pt
 from time import sleep
+import numpy as np
+from numba import jit
+import pygame
+import patterns as pt
 
 def check_events(state, speed, main, options, xmouse, ymouse, 
                  move_to_next_step):
     '''Respond to keypress and mouse.'''
-    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -49,6 +48,7 @@ def check_events(state, speed, main, options, xmouse, ymouse,
                     main.interactive = True
                 main.check_cell = True
 
+
 def update_boundaries(cells_matrix):
     '''
     Set the border of cells_matrix for the
@@ -58,6 +58,7 @@ def update_boundaries(cells_matrix):
     cells_matrix[-1, :] = cells_matrix[1, :]
     cells_matrix[:, 0] = cells_matrix[:, -2]
     cells_matrix[:, -1] = cells_matrix[:, 1]
+
 
 @jit
 def chek_neighbourhoods(cells_matrix):
@@ -76,6 +77,7 @@ def chek_neighbourhoods(cells_matrix):
                         if cells_matrix[i, j]:
                             neigh[r - 1, c - 1] += 1
     return neigh
+
 
 @jit
 def update_matrix(cells_matrix, neigh):
@@ -99,6 +101,7 @@ def update_matrix(cells_matrix, neigh):
                 elif cells_matrix[r_index, c_index] and neigh[r_index - 1, c_index - 1] > 3:
                     cells_matrix[r_index, c_index] = False
 
+
 def update_cells(cells_matrix, neigh, game_settings):
     '''Update the next generation of cells.'''
     update_matrix(cells_matrix, neigh)
@@ -106,11 +109,13 @@ def update_cells(cells_matrix, neigh, game_settings):
     if game_settings.periodic_boundaries:
         update_boundaries(cells_matrix)
   
+
 def reset_game(game_settings, state, speed):
     '''Reset all settings.'''
     state.pause = False
     state.generation = 0
     speed.factor = game_settings.initial_speed
+
 
 def update_interactive(game_settings, cells_matrix):
     '''Update cells_matrix in interactive mode.'''
@@ -121,6 +126,7 @@ def update_interactive(game_settings, cells_matrix):
         cells_matrix[yc + 1, xc + 1] = False
     else:
         cells_matrix[yc + 1, xc + 1] = True
+
 
 def show_samples(game_settings, options, cells_matrix, xmouse, ymouse):
     '''Check if the mouse cursor is over a configuration.'''
@@ -144,6 +150,7 @@ def show_samples(game_settings, options, cells_matrix, xmouse, ymouse):
     if options.exploder_rect.collidepoint(xmouse, ymouse):
         init_config = "exploder"
     set_initial_cells(game_settings, options,  init_config, cells_matrix)
+
 
 def set_initial_cells(game_settings, options, init_config, cells_matrix):
     '''Set the initial configuration of alive cells.'''
@@ -197,6 +204,7 @@ def set_initial_cells(game_settings, options, init_config, cells_matrix):
     elif game_settings.periodic_boundaries:
         update_boundaries(cells_matrix)
 
+
 def main_menu(xmouse, ymouse, game_settings, state, speed, main, options, cells_matrix):
     '''Main menu interface.'''
     reset_game(game_settings, state, speed)
@@ -210,6 +218,7 @@ def main_menu(xmouse, ymouse, game_settings, state, speed, main, options, cells_
         main.menu = False
         main.interactive = False
 
+
 def game(move_to_next_step, speed, cells_matrix, game_settings, state):
     '''Start the game.'''
     move_to_next_step[0] = False
@@ -218,6 +227,7 @@ def game(move_to_next_step, speed, cells_matrix, game_settings, state):
     update_cells(cells_matrix, neigh, game_settings)
     state.generation += 1
     sleep(speed.factor)
+
 
 def update_screen(game_settings, screen, cells_matrix, state, 
                   speed, main, options, cell):
