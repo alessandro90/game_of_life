@@ -19,10 +19,12 @@ class Settings:
 
         # Speed bar settings.
         self.speed_bar_width = 20
-        self.speed_bar_height = 200
-        self.speed_bar_max_height = 400
+        self.speed_bar_height = self.screen_height // 2
+        self.speed_bar_max_height = self.screen_height
         self.speed_bar_color = 102, 0, 204
-        self.initial_speed = 0.25
+        self.initial_drop = 250
+        self.speed_step = 1
+        self.speed_max_drop = 500
 
         # Main menu options
         self.options_color = (255, 255, 0)

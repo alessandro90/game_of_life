@@ -26,6 +26,7 @@ def run_game():
     options = Options(screen, game_settings)
     # Set speed and speed bar.
     speed = Speed(screen, game_settings)
+    to_drop = [speed.actual_drop]
     # Set pause menu.
     state = Status(screen)
 
@@ -46,8 +47,8 @@ def run_game():
             gf.main_menu(xmouse, ymouse, game_settings, state, speed, 
                          main, options, cells_matrix)
         elif not state.pause or move_to_next_step[0]:
-            gf.game(move_to_next_step, speed, cells_matrix, 
-                    game_settings, state)
+            gf.game(move_to_next_step, cells_matrix, 
+                    game_settings, state, speed, to_drop)
 
         gf.update_screen(game_settings, screen, cells_matrix, 
                          state, speed, main, options, cell)

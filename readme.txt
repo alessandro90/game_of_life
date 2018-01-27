@@ -26,8 +26,7 @@ iterations is shown. When the game is paused, it is possible to advance to the n
 iteration by pressing the 'righ arrow' key.
 
 To adjust the speed press the 'up arrow' key (to speed up) and the  'down arrow' key (to 
-slow down). The lowest possible speed is roughly 2 iterations per second. The highest 
-possible speed depends on your system.
+slow down).
 
 To play the game just launch game_of_life.py. To exit the game click on the 'x' on the 
 screen.

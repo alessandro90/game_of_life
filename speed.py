@@ -3,8 +3,10 @@ import pygame
 class Speed:
     '''Class to modify execution speed.'''
     def __init__(self, screen, game_settings):
-        self.factor = game_settings.initial_speed
-        self.initial_speed = game_settings.initial_speed
+        self.actual_drop = game_settings.initial_drop
+        self.initial_drop = game_settings.initial_drop
+        self.step = game_settings.speed_step
+        self.max_drop = game_settings.speed_max_drop
         self.accelerate = False
         self.decelerate = False
         self.visible = False
@@ -18,15 +20,13 @@ class Speed:
         
     def increase(self):
         '''Increase current speed.'''
-        if self.factor > 1e-6:
-            self.factor -= 1e-2
-        if self.factor < 1e-6:
-            self.factor = 0.
+        if self.actual_drop >= self.step:
+            self.actual_drop -= self.step
 
     def decrease(self):
         '''Decrease current speed.'''
-        if self.factor < 2 * self.initial_speed:
-            self.factor += 1e-2
+        if self.actual_drop < self.max_drop:
+            self.actual_drop += self.step
 
     def update(self):
         '''Update current speed.'''
@@ -37,7 +37,7 @@ class Speed:
 
     def draw(self):
         '''Draw a speed bar on screen.'''
-        self.bar_size = (2 * self.initial_speed - self.factor) * (self.max_height - 1) + 1
+        self.bar_size = int(((self.max_drop - self.actual_drop) / self.max_drop) * (self.max_height - 1) + 1)
         self.rect = pygame.Rect(self.screen_rect.right - 25, 
                                 0, 
                                 self.width, 

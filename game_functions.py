@@ -1,5 +1,4 @@
 import sys
-from time import sleep
 import numpy as np
 from numba import jit
 import pygame
@@ -114,7 +113,7 @@ def reset_game(game_settings, state, speed):
     '''Reset all settings.'''
     state.pause = False
     state.generation = 0
-    speed.factor = game_settings.initial_speed
+    speed.actual_drop = game_settings.initial_drop
 
 
 def update_interactive(game_settings, cells_matrix):
@@ -219,15 +218,22 @@ def main_menu(xmouse, ymouse, game_settings, state, speed, main, options, cells_
         main.interactive = False
 
 
-def game(move_to_next_step, speed, cells_matrix, game_settings, state):
+def game(move_to_next_step, cells_matrix, game_settings, state, speed, to_drop):
     '''Start the game.'''
-    move_to_next_step[0] = False
-    speed.update()
-    neigh = chek_neighbourhoods(cells_matrix)
-    update_cells(cells_matrix, neigh, game_settings)
-    state.generation += 1
-    sleep(speed.factor)
-
+    if to_drop[0] >= speed.step:
+        to_drop[0] -= 1 # speed.step
+        previous_speed = speed.actual_drop
+        speed.update()
+        if previous_speed != speed.actual_drop:
+            to_drop[0] = speed.actual_drop
+    else:
+        speed.update()
+        to_drop[0] = speed.actual_drop
+        move_to_next_step[0] = False
+        neigh = chek_neighbourhoods(cells_matrix)
+        update_cells(cells_matrix, neigh, game_settings)
+        state.generation += 1
+    
 
 def update_screen(game_settings, screen, cells_matrix, state, 
                   speed, main, options, cell):
